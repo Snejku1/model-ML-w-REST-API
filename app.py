@@ -1,13 +1,9 @@
-
 import pickle
 import numpy as np
 from flask import Flask, request, jsonify
-<<<<<<< HEAD
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-=======
->>>>>>> c05d710ab091eeb3d1dd533e937110ede7c04b03
 
 class Perceptron():
     def __init__(self, eta=0.01, n_iter=10):
@@ -34,7 +30,6 @@ class Perceptron():
     def predict(self, X):
         return np.where(self.net_input(X) >= 0.0, 1, -1)
 
-<<<<<<< HEAD
 def train_model():
     iris = load_iris()
     X = iris.data[:, [0, 2]]
@@ -62,21 +57,11 @@ app = Flask(__name__)
 # Create an API end point
 @app.route('/predict_get', methods=['GET'])
 def get_prediction():
-=======
-# Tworzenie aplikacji Flask
-app = Flask(__name__)
-
-# Tworzenie endpointu API
-@app.route('/predict_get', methods=['GET'])
-def get_prediction():
-    # długość działki
->>>>>>> c05d710ab091eeb3d1dd533e937110ede7c04b03
     sepal_length = float(request.args.get('sl'))
     petal_length = float(request.args.get('pl'))
     
     features = [sepal_length, petal_length]
 
-<<<<<<< HEAD
     # Load pickled model file
     with open('model.pkl', "rb") as picklefile:
         model = pickle.load(picklefile)
@@ -84,16 +69,6 @@ def get_prediction():
     # Predict the class using the model
     predicted_class = int(model.predict(features))
     
-=======
-    # Wczytanie modelu z pliku
-    with open('model.pkl', "rb") as picklefile:
-        model = pickle.load(picklefile)
-        
-    # Predykcja klasy za pomocą modelu
-    predicted_class = int(model.predict(features))
-    
-    # Zwrócenie obiektu JSON zawierającego cechy i predykcję
->>>>>>> c05d710ab091eeb3d1dd533e937110ede7c04b03
     return jsonify(features=features, predicted_class=predicted_class)
 
 if __name__ == '__main__':
